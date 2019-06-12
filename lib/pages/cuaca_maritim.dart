@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:buoy_weather/widget/header.dart';
 
 class CuacaMaritim extends StatefulWidget {
   @override
@@ -14,8 +13,6 @@ class _CuacaMaritimState extends State<CuacaMaritim> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          //header
-          Header(),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 16.0,
@@ -30,7 +27,7 @@ class _CuacaMaritimState extends State<CuacaMaritim> {
           ),
           Expanded(
             child: Container(
-              color: Colors.grey.withOpacity(0.9),
+              color: Colors.grey.withOpacity(0.8),
               child: PanelDataCuacaMaritim(),
             ),
           )
@@ -50,16 +47,17 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 10.0,
-        horizontal: 16.0
+      padding: EdgeInsets.only(
+        top: 10.0,
+        bottom: 10.0,
+        left: 16.0
       ),
       child: Row(
         children: <Widget>[
           //left header
           Container(
             width: 100.0,
-            color: Colors.white,
+//            color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
@@ -77,25 +75,40 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                   style: TextStyle(
                   ),
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 Text(
                   'CURAH HUJAN',
                   style: TextStyle(
                   ),
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 Text(
                   'GELOMBANG AIR LAUT',
                   style: TextStyle(
                   ),
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 Text(
                   'ARUS LAUT',
                   style: TextStyle(
                   ),
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 Text(
                   'KECEPATAN ANGIN',
                   style: TextStyle(
                   ),
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 Text(
                   'ARAH ANGIN',
@@ -103,6 +116,17 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                   ),
                 ),
               ],
+            ),
+          ),
+          SizedBox(
+            width: 16.0,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                //table data
+              ),
             ),
           )
         ],

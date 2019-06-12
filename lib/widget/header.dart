@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:buoy_weather/states/AppState.dart';
 
-class Header extends StatefulWidget {
-  @override
-  _HeaderState createState() => _HeaderState();
-}
-
-class _HeaderState extends State<Header> {
+class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 16.0,
         vertical: 8.0,
       ),
-      color: Colors.grey.withOpacity(0.9),
+      color: Colors.grey.withOpacity(0.8),
       height: 120.0,
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -72,7 +70,7 @@ class _HeaderState extends State<Header> {
                 height: 8.0,
               ),
               Text(
-                '18.45',
+                state.getTime.toString(),
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14.0
@@ -82,14 +80,14 @@ class _HeaderState extends State<Header> {
                 height: 8.0,
               ),
               Text(
-                'Senin',
+                state.getDayName.toString(),
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14.0
                 ),
               ),
               Text(
-                '25 Maret 2019',
+                state.getDate.toString(),
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14.0
@@ -112,3 +110,4 @@ class _HeaderState extends State<Header> {
     );
   }
 }
+
