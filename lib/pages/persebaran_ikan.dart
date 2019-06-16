@@ -28,119 +28,120 @@ class _PersebaranIkanState extends State<PersebaranIkan> with TickerProviderStat
   }
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+              right: 16.0,
+              left: 16.0,
+              top: 6.0,
+              bottom: 6.0
+          ),
+          child: Text(
+            'HARI',
+            style: TextStyle(
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        //tab hari - hari
+        Container(
+          color: Colors.grey.withOpacity(0.6),
+          padding: EdgeInsets.symmetric(vertical: 2.0),
+          child: TabBar(
+            controller: _tabHariController,
+            labelPadding: EdgeInsets.all(0),
+            tabs: <Widget>[
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==0,
+                  namaHari: 'Senin',
+                ),
+              ),
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==1,
+                  namaHari: 'Selasa',
+                ),
+              ),
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==2,
+                  namaHari: 'Rabu',
+                ),
+              ),
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==3,
+                  namaHari: 'Kamis',
+                ),
+              ),
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==4,
+                  namaHari: 'Jumat',
+                ),
+              ),
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==5,
+                  namaHari: 'Sabtu',
+                ),
+              ),
+              Tab(
+                child: TombolHari(
+                  isActive: _tabHariController.index==6,
+                  namaHari: 'Minggu',
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(
+              right: 16.0,
+              left: 16.0,
+              top: 6.0,
+              bottom: 6.0
+          ),
+          child: Text(
+            'PERSEBARAN IKAN',
+            style: TextStyle(
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        Container(
+          height: 220.0,
+          color: Colors.grey.withOpacity(0.8),
+          child: ListView(
             padding: EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 10.0
+              vertical: 12.0,
+              horizontal: 20.0
             ),
-            child: Text(
-              'HARI',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold
+            controller: _listIkanController,
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              IkanCard(
+                beratIkan: 20,
+                imagePath: 'assets/images/bg.jpeg',
+                namaIkan: 'IKAN KERAPU',
               ),
-            ),
-          ),
-          //tab hari - hari
-          Container(
-            color: Colors.grey.withOpacity(0.8),
-            padding: EdgeInsets.symmetric(vertical: 2.0),
-            child: TabBar(
-              controller: _tabHariController,
-              labelPadding: EdgeInsets.all(0),
-              tabs: <Widget>[
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==0,
-                    namaHari: 'Senin',
-                  ),
-                ),
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==1,
-                    namaHari: 'Selasa',
-                  ),
-                ),
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==2,
-                    namaHari: 'Rabu',
-                  ),
-                ),
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==3,
-                    namaHari: 'Kamis',
-                  ),
-                ),
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==4,
-                    namaHari: 'Jumat',
-                  ),
-                ),
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==5,
-                    namaHari: 'Sabtu',
-                  ),
-                ),
-                Tab(
-                  child: TombolHari(
-                    isActive: _tabHariController.index==6,
-                    namaHari: 'Minggu',
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 10.0
-            ),
-            child: Text(
-              'PERSEBARAN IKAN',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold
+              IkanCard(
+                beratIkan: 20,
+                imagePath: 'assets/images/bg.jpeg',
+                namaIkan: 'IKAN KUNIRAN',
               ),
-            ),
-          ),
-          Container(
-            height: 220.0,
-            color: Colors.grey.withOpacity(0.8),
-            child: ListView(
-              padding: EdgeInsets.symmetric(
-                vertical: 12.0,
-                horizontal: 20.0
+              IkanCard(
+                beratIkan: 20,
+                imagePath: 'assets/images/bg.jpeg',
+                namaIkan: 'IKAN BIJI NANGKA',
               ),
-              controller: _listIkanController,
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                IkanCard(
-                  beratIkan: 20,
-                  imagePath: 'assets/images/bg.jpeg',
-                  namaIkan: 'IKAN KERAPU',
-                ),
-                IkanCard(
-                  beratIkan: 20,
-                  imagePath: 'assets/images/bg.jpeg',
-                  namaIkan: 'IKAN KUNIRAN',
-                ),
-                IkanCard(
-                  beratIkan: 20,
-                  imagePath: 'assets/images/bg.jpeg',
-                  namaIkan: 'IKAN BIJI NANGKA',
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

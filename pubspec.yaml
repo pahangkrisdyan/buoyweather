@@ -46,6 +46,30 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/bg.jpeg
+    - assets/images/splashscreen-depan.png
+    - assets/images/logo-biru.png
+    - assets/images/logo-putih.png
+    - assets/images/ikan kerapu.png
+    - assets/images/ikan kuniran.png
+    - assets/images/ikan biji nangka.png
+    - assets/images/icon-ikan-kuniran.png
+    - assets/images/icon-ikan-kerapu.png
+    - assets/images/icon-ikan-bijinangka.png
+    - assets/images/bg-hujan.png
+    - assets/images/bg-cerah.png
+    - assets/images/bg-berawan.png
+    - assets/images/512px-icon-playstore.png
+    - assets/images/192px-icon-thumb.png
+    - assets/images/192px-icon-tentang.png
+    - assets/images/192px-icon-persebaran-ikan.png
+    - assets/images/192px-icon-cuaca-maritim.png
+    - assets/images/100px-icon-hujan.png
+    - assets/images/100px-icon-cerah.png
+    - assets/images/100px-icon-berawan.png
+    - assets/images/100px-button-plus.png
+    - assets/images/100px-button-location.png
+    - assets/images/100px-button-dropdown.png
+    - assets/images/100px-buton-delete.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -58,17 +82,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: SourceSansPro
+      fonts:
+        - asset: assets/fonts/source_sans_pro/SourceSansPro-Regular.ttf
+        - asset: assets/fonts/source_sans_pro/SourceSansPro-Italic.ttf
+          style: italic
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

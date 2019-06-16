@@ -13,7 +13,7 @@ class _TentangState extends State<Tentang> {
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        color: Colors.grey.withOpacity(0.8),
+        color: Colors.grey.withOpacity(0.6),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

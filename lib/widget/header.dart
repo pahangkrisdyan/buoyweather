@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:buoy_weather/states/AppState.dart';
+import 'package:buoy_weather/states/app_state.dart';
 
 class Header extends StatelessWidget {
   @override
@@ -11,8 +11,8 @@ class Header extends StatelessWidget {
         horizontal: 16.0,
         vertical: 8.0,
       ),
-      color: Colors.grey.withOpacity(0.8),
-      height: 120.0,
+      color: Colors.grey.withOpacity(0.6),
+      height: 118.0,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,9 +44,9 @@ class Header extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    '29',
+                    state.getCuacamaritim?.temperatur.toString(),
                     style: TextStyle(
-                      fontSize: 54.0,
+                      fontSize: 46.0,
                     ),
                   ),
                   Text(
