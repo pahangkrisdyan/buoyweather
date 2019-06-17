@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:buoy_weather/states/app_state.dart';
+import 'package:provider/provider.dart';
 
 class PersebaranIkan extends StatefulWidget {
   @override
@@ -28,6 +30,7 @@ class _PersebaranIkanState extends State<PersebaranIkan> with TickerProviderStat
   }
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -124,18 +127,18 @@ class _PersebaranIkanState extends State<PersebaranIkan> with TickerProviderStat
             scrollDirection: Axis.horizontal,
             children: <Widget>[
               IkanCard(
-                beratIkan: 20,
-                imagePath: 'assets/images/bg.jpeg',
+                beratIkan: state.getPrediksiIkan.kerapu,
+                imagePath: 'assets/images/ikan kerapu.png',
                 namaIkan: 'IKAN KERAPU',
               ),
               IkanCard(
-                beratIkan: 20,
-                imagePath: 'assets/images/bg.jpeg',
+                beratIkan: state.getPrediksiIkan.kuniran,
+                imagePath: 'assets/images/ikan kuniran.png',
                 namaIkan: 'IKAN KUNIRAN',
               ),
               IkanCard(
-                beratIkan: 20,
-                imagePath: 'assets/images/bg.jpeg',
+                beratIkan: state.getPrediksiIkan.nangka,
+                imagePath: 'assets/images/ikan biji nangka.png',
                 namaIkan: 'IKAN BIJI NANGKA',
               ),
             ],
@@ -149,7 +152,7 @@ class _PersebaranIkanState extends State<PersebaranIkan> with TickerProviderStat
 class IkanCard extends StatelessWidget {
   final String namaIkan;
   final String imagePath;
-  final int beratIkan;
+  final double beratIkan;
   IkanCard({this.namaIkan, this.beratIkan, this.imagePath});
   @override
   Widget build(BuildContext context) {
@@ -177,7 +180,7 @@ class IkanCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4.0),
                 child: Image(
                   image: AssetImage(imagePath),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               )
             ),

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:buoy_weather/constans.dart';
 import 'package:buoy_weather/states/app_state.dart';
-class CuacaMaritim extends StatefulWidget {
-  @override
-  _CuacaMaritimState createState() => _CuacaMaritimState();
-}
 
-class _CuacaMaritimState extends State<CuacaMaritim> {
+class CuacaMaritim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,16 +35,9 @@ class _CuacaMaritimState extends State<CuacaMaritim> {
     );
   }
 }
-
-class PanelDataCuacaMaritim extends StatefulWidget {
-  @override
-  _PanelDataCuacaMaritimState createState() => _PanelDataCuacaMaritimState();
-}
-
-class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
+class PanelDataCuacaMaritim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<AppState>(context);
     return Padding(
       padding: EdgeInsets.only(
         top: 10.0,
@@ -72,13 +62,16 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                     fontWeight: FontWeight.bold
                   ),
                 ),
+                SizedBox(
+                  height: 0.0,
+                ),
                 Text(
                   'CUACA',
                   style: TextStyle(
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 0.0,
                 ),
                 Text(
                   'CURAH HUJAN',
@@ -86,7 +79,7 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 0.0,
                 ),
                 Text(
                   'GELOMBANG AIR LAUT',
@@ -94,7 +87,7 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 0.0,
                 ),
                 Text(
                   'ARUS LAUT',
@@ -102,7 +95,7 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 0.0,
                 ),
                 Text(
                   'KECEPATAN ANGIN',
@@ -110,12 +103,15 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 0.0,
                 ),
                 Text(
                   'ARAH ANGIN',
                   style: TextStyle(
                   ),
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
               ],
             ),
@@ -123,86 +119,153 @@ class _PanelDataCuacaMaritimState extends State<PanelDataCuacaMaritim> {
           SizedBox(
             width: 16.0,
           ),
-          Container(
-            width: 100.0,
-//            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                //pukul
-                Text(
-                  'Saat Ini',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text(
-                  //cuaca
-                  state.getCuacamaritim?.curahHujan.toString() + 'mm',
-                  style: TextStyle(
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  //curah hujan
-                  state.getCuacamaritim?.curahHujan.toString() + 'mm',
-                  style: TextStyle(
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  //gelombang air laut
-                  state.getCuacamaritim?.ketinggian.toString() + 'm',
-                  style: TextStyle(
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  //arus laut
-                  state.getCuacamaritim?.tekanan.toString() + 'm',
-                  style: TextStyle(
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  //kecepatan angin
-                  state.getCuacamaritim?.kecepatanAngin.toString() + 'm/s',
-                  style: TextStyle(
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  //arah angin
-                  state.getCuacamaritim?.arahAngin.toString(),
-                  style: TextStyle(
-                  ),
-                ),
-              ],
-            ),
-          ),
+//          CuacaMaritimColumn(
+//            arahAngin: ArahAngin.Utara,
+//            arusLaut: state.getCuacamaritim?.tekanan,
+//            cuaca: Cuaca.Cerah,
+//            curahHujan: state.getCuacamaritim?.ketinggian,
+//            gelombangAirLaut: state.getCuacamaritim?.spl,
+//            kecepatanAngin: state.getCuacamaritim?.kecepatanAngin,
+//            label: 'SAAT INI',
+//          )
 //          Expanded(
 //            child: SingleChildScrollView(
 //              scrollDirection: Axis.horizontal,
 //              child: Container(
-//                //table data
+//                child: CuacaMaritimTable(),
 //              ),
 //            ),
 //          )
+          Expanded(
+            child: CuacaMaritimTable(),
+          )
         ],
       ),
     );
   }
 }
+
+class CuacaMaritimTable extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: state.getListCuacaMaritim.listCuacaMaritim.map((cuacaMaritim){
+        return CuacaMaritimColumn(
+          label: cuacaMaritim.label,
+          kecepatanAngin: cuacaMaritim.kecepatanAngin,
+          gelombangAirLaut: cuacaMaritim.ketinggian,
+          curahHujan: cuacaMaritim.curahHujan,
+          cuaca: Cuaca.Cerah,
+          arusLaut: cuacaMaritim.tekanan,
+          arahAngin: ArahAngin.Utara,
+        );
+      }).toList(),
+    );
+  }
+}
+
+
+
+class CuacaMaritimColumn extends StatelessWidget {
+
+  final Cuaca cuaca;
+  final double curahHujan;
+  final double gelombangAirLaut;
+  final double arusLaut;
+  final double kecepatanAngin;
+  final ArahAngin arahAngin;
+  final String label;
+
+  CuacaMaritimColumn({
+    this.cuaca,
+    this.arahAngin,
+    this.kecepatanAngin,
+    this.curahHujan,
+    this.arusLaut,
+    this.gelombangAirLaut,
+    this.label
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.0,
+//            color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          //pukul
+          Text(
+            label,
+            style: TextStyle(
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 5.0),
+            height: 40.0,
+            child: Image(
+              image: AssetImage(cuacaToImagePath(cuaca)),
+            ),
+          ),
+          Text(
+            //curah hujan
+//            state.getCuacamaritim?.ketinggian.toString() + 'mm',
+            curahHujan.toString() + 'mm',
+            style: TextStyle(
+            ),
+          ),
+          SizedBox(
+            height: 0.0,
+          ),
+          Text(
+            //gelombang air laut
+            //state.getCuacamaritim?.spl.toString() + 'm',
+            gelombangAirLaut.toString() + 'm',
+            style: TextStyle(
+            ),
+          ),
+          SizedBox(
+            height: 0.0,
+          ),
+          Text(
+            //arus laut
+//            state.getCuacamaritim?.tekanan.toString() + 'm',
+            arusLaut==null?'--':arusLaut.toString() + 'm',
+            style: TextStyle(
+            ),
+          ),
+          SizedBox(
+            height: 0.0,
+          ),
+          Text(
+            //kecepatan angin
+//            state.getCuacamaritim?.kecepatanAngin.toString() + 'm/s',
+            kecepatanAngin.toString() + 'm/s',
+            style: TextStyle(
+            ),
+          ),
+          SizedBox(
+            height: 0.0,
+          ),
+          Text(
+            //arah angin
+            //state.getCuacamaritim?.arahAngin.toString(),
+            arahAnginToString(arahAngin),
+            style: TextStyle(
+            ),
+          ),SizedBox(
+            height: 6.0,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 

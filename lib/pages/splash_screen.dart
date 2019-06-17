@@ -10,7 +10,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  startTime2() async {
+  startTime() async {
       final appState = Provider.of<AppState>(context);
       appState.initState().then((_){
         Timer.periodic(Duration(seconds: 1), (Timer t) => appState.setTime());
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    startTime2();
+    startTime();
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
