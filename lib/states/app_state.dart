@@ -5,24 +5,26 @@ import 'package:buoy_weather/models/cuaca_maritim.dart';
 import 'package:buoy_weather/models/prediksi_ikan.dart';
 import 'dart:convert';
 
+enum LoadStatus{
+  PREPARE, LOAD_CUACA_MARITIM, LOAD_PREDIKSI_CUACA_MARITIM, LOAD_PREDIKSI_IKAN, HAMPIR_SELESAI, DONE
+}
+
 class AppState with ChangeNotifier {
 
   static const String API_KEY = 'UY4GS7XUXXOYE3R0';
-  static const String api_all_fields_url = 'www.thingspeak.com';
+  static const String DOMAIN_URL = 'www.thingspeak.com';
 
-  static var queryParameters = {
-    'api_key': API_KEY,
-    'results': '1',
-  };
 
-  var apiUri = Uri.https(api_all_fields_url, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
-  var cuacaMaritimFuturePredictionUri = Uri.https(api_all_fields_url, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
-  var prediksiIkanUri = Uri.https(api_all_fields_url, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
+  var apiUri = Uri.https(DOMAIN_URL, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
+  var cuacaMaritimFuturePredictionUri = Uri.https(DOMAIN_URL, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
+  var prediksiIkanUri = Uri.https(DOMAIN_URL, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
 
   DateTime _dateTime;
   String _time;
   String _date;
   String _dayName;
+
+  LoadStatus _loadStatus;
 
   CuacaMaritim _cuacaMaritim;
 
@@ -36,22 +38,34 @@ class AppState with ChangeNotifier {
   String get getDate => _date;
   String get getDayName => _dayName;
   CuacaMaritim get getCuacamaritim => _cuacaMaritim;
-  CuacaMaritimList get getListCuacaMaritim=> _listCuacaMaritim;
+  CuacaMaritimList get getListCuacaMaritim => _listCuacaMaritim;
   PrediksiIkan get getPrediksiIkan => _prediksiIkan;
+  LoadStatus get getLoadStatus => _loadStatus;
+
+  Future<void> _fetchData()async{
 
 
-  Future<void> fetch()async{
+    setLoadStatus(LoadStatus.LOAD_CUACA_MARITIM);
     var response = await http.get(apiUri);
     setCuacaMaritim(response.body);
-    var response2 = await http.get(cuacaMaritimFuturePredictionUri);
-    setCuacaMaritimList(response2.body);
+
+    setLoadStatus(LoadStatus.LOAD_PREDIKSI_IKAN);
     var response3 = await http.get(prediksiIkanUri);
     setPrediksiIkan(response3.body);
+
+    setLoadStatus(LoadStatus.LOAD_PREDIKSI_CUACA_MARITIM);
+    var response2 = await http.get(cuacaMaritimFuturePredictionUri);
+    setCuacaMaritimList(response2.body);
+
   }
 
   void setPrediksiIkan(String jsonString){
     Map map = jsonDecode(jsonString);
     _prediksiIkan = PrediksiIkan.fromJson(map);
+  }
+
+  void setLoadStatus(LoadStatus loadStatus){
+    _loadStatus = loadStatus;
   }
 
   void setCuacaMaritimList(String jsonString){
@@ -66,7 +80,15 @@ class AppState with ChangeNotifier {
   }
 
   Future<void> initState() async {
-    await fetch();
+    await _refreshData();
+  }
+
+
+
+  void _refreshData() async {
+    setLoadStatus(LoadStatus.PREPARE);
+    await _fetchData();
+    setLoadStatus(LoadStatus.HAMPIR_SELESAI);
     _dateTime = DateTime.now();//waktu jakarta
     if(DateFormat('kk:mm').format(_dateTime)!=_time||_date==null||_dayName==null){
       String day = DateFormat('dd').format(_dateTime);
@@ -78,17 +100,8 @@ class AppState with ChangeNotifier {
     }
   }
 
-  void setTime(){
-    fetch();
-    _dateTime = DateTime.now().add(Duration(hours: 7));//waktu jakarta
-    if(DateFormat('kk:mm').format(_dateTime)!=_time||_date==null||_dayName==null){
-      String day = DateFormat('dd').format(_dateTime);
-      String month = _convertToDayMonthName(DateFormat('MM').format(_dateTime));
-      String year = DateFormat('yyyy').format(_dateTime);
-      _time = DateFormat('kk:mm').format(_dateTime);
-      _dayName = _convertToIndonesian(DateFormat('EEEE').format(_dateTime));
-      _date = day + ' ' + month + ' ' + year;
-    }
+  void setTime()async{
+    await _refreshData();
     notifyListeners();
   }
 
