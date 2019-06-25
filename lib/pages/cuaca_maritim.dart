@@ -226,7 +226,7 @@ class CuacaMaritimColumn extends StatelessWidget {
           Text(
             //gelombang air laut
             //state.getCuacamaritim?.spl.toString() + 'm',
-            gelombangAirLaut.toString() + 'm',
+            gelombangAirLaut.toStringAsFixed(3) + 'm',
             style: TextStyle(
             ),
           ),
@@ -236,7 +236,7 @@ class CuacaMaritimColumn extends StatelessWidget {
           Text(
             //arus laut
 //            state.getCuacamaritim?.tekanan.toString() + 'm',
-            arusLaut==null?'--':arusLaut.toString() + 'm',
+            arusLaut==null?'--':arusLaut.toStringAsFixed(3) + 'm',
             style: TextStyle(
             ),
           ),

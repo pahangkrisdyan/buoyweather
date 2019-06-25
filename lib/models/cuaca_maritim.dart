@@ -47,7 +47,7 @@ class CuacaMaritimList {
 
   static List<CuacaMaritim> _fromJson(Map<String, dynamic> json){
     List<CuacaMaritim> list = List<CuacaMaritim>();
-    for(int i = 0; i<20; i++){
+    for(int i = 0; i<12; i++){
       Map<String, dynamic> item = json['feeds'][i];
       list.add(CuacaMaritim(
         arahAngin: double.parse(item['field5']),

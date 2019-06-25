@@ -27,8 +27,6 @@ class MyApp extends StatelessWidget {
         fontFamily: 'SourceSansPro',
       ),
       home: SplashScreen(),
-
     );
   }
 }
-

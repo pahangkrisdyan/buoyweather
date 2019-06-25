@@ -16,7 +16,7 @@ class AppState with ChangeNotifier {
   };
 
   var apiUri = Uri.https(api_all_fields_url, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
-  var cuacaMaritimFuturePredictionUri = Uri.https(api_all_fields_url, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '20'});
+  var cuacaMaritimFuturePredictionUri = Uri.https(api_all_fields_url, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
   var prediksiIkanUri = Uri.https(api_all_fields_url, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
 
   DateTime _dateTime;
