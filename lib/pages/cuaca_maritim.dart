@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:buoy_weather/constans.dart';
 import 'package:buoy_weather/states/app_state.dart';
 
+//Kode sebagai widget/yampilan yang terlihat pada apliaksi
+
+//class sebagai tampilan halaman cuaca maritim
 class CuacaMaritim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,8 @@ class CuacaMaritim extends StatelessWidget {
     );
   }
 }
+
+//class sebagai panel data (tabel)
 class PanelDataCuacaMaritim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,7 @@ class PanelDataCuacaMaritim extends StatelessWidget {
           //left header
           Container(
             width: 100.0,
-//            color: Colors.white,
+          //judul sebelah kiri
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
@@ -119,23 +124,6 @@ class PanelDataCuacaMaritim extends StatelessWidget {
           SizedBox(
             width: 16.0,
           ),
-//          CuacaMaritimColumn(
-//            arahAngin: ArahAngin.Utara,
-//            arusLaut: state.getCuacamaritim?.tekanan,
-//            cuaca: Cuaca.Cerah,
-//            curahHujan: state.getCuacamaritim?.ketinggian,
-//            gelombangAirLaut: state.getCuacamaritim?.spl,
-//            kecepatanAngin: state.getCuacamaritim?.kecepatanAngin,
-//            label: 'SAAT INI',
-//          )
-//          Expanded(
-//            child: SingleChildScrollView(
-//              scrollDirection: Axis.horizontal,
-//              child: Container(
-//                child: CuacaMaritimTable(),
-//              ),
-//            ),
-//          )
           Expanded(
             child: CuacaMaritimTable(),
           )
@@ -145,6 +133,7 @@ class PanelDataCuacaMaritim extends StatelessWidget {
   }
 }
 
+//class sebagai table data
 class CuacaMaritimTable extends StatelessWidget {
 
   @override
@@ -168,7 +157,7 @@ class CuacaMaritimTable extends StatelessWidget {
 }
 
 
-
+// tampilan dalam 1 kolom (1 record cuaca)
 class CuacaMaritimColumn extends StatelessWidget {
 
   final Cuaca cuaca;

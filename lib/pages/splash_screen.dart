@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:buoy_weather/states/app_state.dart';
+import 'package:buoy_weather/constans.dart';
 
+//class sebagai splashscreeen (tampilan logo pada saan aplikasi dibuka sekaligus)
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -10,13 +12,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  //pada class ini juga dilakukan loading data dr thingspeak pertamakali
   startTime(AppState appState) async {
       appState.initState().then((_){
+        //melakukan loading data dari thingspeak setiap 1 detik sekali
         Timer.periodic(Duration(seconds: 1), (Timer t) => appState.setTime());
         navigationPage();
       });
   }
 
+  //berpindah halaman ke HomePage
   void navigationPage() {
     Navigator.of(context).pushReplacementNamed('/HomePage');
   }
@@ -43,6 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
       )
     );
   }
+
+  //tampilan loading (bulat)
   Widget _circularProgressIndicator(){
     final state = Provider.of<AppState>(context);
     return Column(
@@ -64,6 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
+  //kalimat yang muncul saat loading sesuai loading status
   String _getLoadingText(LoadStatus loadStatus){
     switch(loadStatus){
       case LoadStatus.PREPARE: return 'Sedang meyiapkan...'; break;

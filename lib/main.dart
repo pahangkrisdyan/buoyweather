@@ -4,13 +4,16 @@ import 'states/app_state.dart';
 import 'pages/splash_screen.dart';
 import 'pages/home_page.dart';
 
+//methon utama yg dipanggil saat aplikasi dibuka
 void main() => runApp(
+    //sttae management
     ChangeNotifierProvider<AppState>(
       builder: (_) => AppState(),
       child: MyApp(),
     )
 );
 
+//aplikasi yang akan di proses
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'SourceSansPro',
       ),
+      //splash screen sebagai halaman awal yang akan dibuka
       home: SplashScreen(),
     );
   }

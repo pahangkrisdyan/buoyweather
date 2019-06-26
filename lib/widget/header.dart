@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:buoy_weather/states/app_state.dart';
 
+//class sebagai tampilan header (jam, suhu, tgl dll)
 class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -3,10 +3,8 @@ import 'cuaca_maritim.dart';
 import 'persebaran_ikan.dart';
 import 'tentang.dart';
 import 'package:buoy_weather/widget/header.dart';
-import 'package:provider/provider.dart';
-import 'package:buoy_weather/states/app_state.dart';
-import 'dart:async';
 
+//class tampilan halaman home/beranda
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -32,7 +30,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
     return Scaffold(
       body: SafeArea(
           child: Stack(
@@ -103,26 +100,5 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
         ),
       ],
     );
-
-//  Widget _bottomTabBar(TabController controller){
-//    return TabBar(
-//      controller: _tabController,
-//      tabs: [
-//        Tab(
-//          icon: Icon(Icons.wb_sunny,),
-//          text: "Cuaca Maritim",
-//        ),
-//        Tab(
-//          icon: Icon(Icons.panorama_fish_eye),
-//          text: "Persebaran Ikan",
-//        ),
-//        Tab(
-//          icon: Icon(Icons.info_outline),
-//          text: "Tentang",
-//        ),
-//      ],
-//    );
-    
-    
   }
 }

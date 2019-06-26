@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:buoy_weather/constans.dart';
 
-class Tentang extends StatefulWidget {
-  @override
-  _TentangState createState() => _TentangState();
-}
-
-class _TentangState extends State<Tentang> {
+//class sebagai tampilan halaman tentang
+class Tentang extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +36,7 @@ class _TentangState extends State<Tentang> {
               height: 10.0,
             ),
             Text(
+              //versi aplikasi
               'V.1',
               style: TextStyle(
                   fontSize: 16.0
@@ -57,7 +55,8 @@ class _TentangState extends State<Tentang> {
               height: 10.0,
             ),
             Text(
-              'Deskripsi',
+              //deskripsi aplikasi
+              DESKRIPSI,
               style: TextStyle(
                   fontSize: 14.0
               ),
