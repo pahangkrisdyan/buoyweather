@@ -8,8 +8,8 @@ class PrediksiIkan{
   PrediksiIkan({this.kerapu, this.kuniran, this.nangka});
   //constructor yang menerima json sebagai input
   PrediksiIkan.fromJson(Map<String, dynamic> json)
-      : kerapu = double.parse(json['feeds'][0]['field1']),
+      : kerapu = double.parse(json['feeds'][0]['field3']),
         kuniran = double.parse(json['feeds'][0]['field2']),
-        nangka = double.parse(json['feeds'][0]['field3']);
+        nangka = double.parse(json['feeds'][0]['field1']);
 
 }

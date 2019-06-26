@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:buoy_weather/states/app_state.dart';
 import 'package:buoy_weather/constans.dart';
@@ -12,11 +11,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  //pada class ini juga dilakukan loading data dr thingspeak pertamakali
-  startTime(AppState appState) async {
+  void _startTime(AppState appState) async {
       appState.initState().then((_){
-        //melakukan loading data dari thingspeak setiap 1 detik sekali
-        Timer.periodic(Duration(seconds: 1), (Timer t) => appState.setTime());
         navigationPage();
       });
   }
@@ -29,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    startTime(appState);
+    _startTime(appState);
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Stack(

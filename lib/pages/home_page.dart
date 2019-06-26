@@ -3,6 +3,8 @@ import 'cuaca_maritim.dart';
 import 'persebaran_ikan.dart';
 import 'tentang.dart';
 import 'package:buoy_weather/widget/header.dart';
+import 'package:provider/provider.dart';
+import 'package:buoy_weather/states/app_state.dart';
 
 //class tampilan halaman home/beranda
 class MyHomePage extends StatefulWidget {
@@ -30,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
     return Scaffold(
       body: SafeArea(
           child: Stack(
@@ -38,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 height: double.infinity,
                 width: double.infinity,
                 child: Image(
-                  image: AssetImage('assets/images/bg-berawan.png'),
+                  image: AssetImage('assets/images/bg-cerah.png'),
                   fit: BoxFit.fitWidth,
                 ),
               ),

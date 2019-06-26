@@ -5,12 +5,14 @@ import 'package:buoy_weather/models/cuaca_maritim.dart';
 import 'package:buoy_weather/models/prediksi_ikan.dart';
 import 'package:buoy_weather/constans.dart';
 import 'dart:convert';
+import 'dart:async';
 
 class AppState with ChangeNotifier {
 
   var apiUri = Uri.https(DOMAIN_URL, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
   var cuacaMaritimFuturePredictionUri = Uri.https(DOMAIN_URL, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
   var prediksiIkanUri = Uri.https(DOMAIN_URL, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
+
 
   DateTime _dateTime;
   String _time;
@@ -34,22 +36,17 @@ class AppState with ChangeNotifier {
   CuacaMaritimList get getListCuacaMaritim => _listCuacaMaritim;
   PrediksiIkan get getPrediksiIkan => _prediksiIkan;
   LoadStatus get getLoadStatus => _loadStatus;
-
+  int i = 0;
   Future<void> _fetchData()async{
-
-
     setLoadStatus(LoadStatus.LOAD_CUACA_MARITIM);
     var response = await http.get(apiUri);
     setCuacaMaritim(response.body);
-
     setLoadStatus(LoadStatus.LOAD_PREDIKSI_IKAN);
     var response3 = await http.get(prediksiIkanUri);
     setPrediksiIkan(response3.body);
-
     setLoadStatus(LoadStatus.LOAD_PREDIKSI_CUACA_MARITIM);
     var response2 = await http.get(cuacaMaritimFuturePredictionUri);
     setCuacaMaritimList(response2.body);
-
   }
 
   void setPrediksiIkan(String jsonString){
@@ -74,6 +71,7 @@ class AppState with ChangeNotifier {
 
   Future<void> initState() async {
     await _refreshData();
+    Timer.periodic(Duration(seconds: 1), (_) => setTime());
   }
 
   void _refreshData() async {
@@ -89,6 +87,7 @@ class AppState with ChangeNotifier {
       _dayName = _convertToIndonesian(DateFormat('EEEE').format(_dateTime));
       _date = day + ' ' + month + ' ' + year;
     }
+
   }
 
   void setTime()async{

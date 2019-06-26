@@ -59,6 +59,7 @@ class Tentang extends StatelessWidget {
               DESKRIPSI,
               style: TextStyle(
                   fontSize: 14.0
+
               ),
             ),
           ],

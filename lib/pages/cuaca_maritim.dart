@@ -196,8 +196,7 @@ class CuacaMaritimColumn extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 5.0),
-            height: 40.0,
+            height: 30.0,
             child: Image(
               image: AssetImage(cuacaToImagePath(cuaca)),
             ),
@@ -215,7 +214,7 @@ class CuacaMaritimColumn extends StatelessWidget {
           Text(
             //gelombang air laut
             //state.getCuacamaritim?.spl.toString() + 'm',
-            gelombangAirLaut.toStringAsFixed(3) + 'm',
+            gelombangAirLaut.toStringAsFixed(3) + 'cm',
             style: TextStyle(
             ),
           ),
@@ -225,7 +224,7 @@ class CuacaMaritimColumn extends StatelessWidget {
           Text(
             //arus laut
 //            state.getCuacamaritim?.tekanan.toString() + 'm',
-            arusLaut==null?'--':arusLaut.toStringAsFixed(3) + 'm',
+            arusLaut==null?'--':arusLaut.toStringAsFixed(3) + 'cm/s',
             style: TextStyle(
             ),
           ),
