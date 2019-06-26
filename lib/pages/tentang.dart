@@ -56,10 +56,12 @@ class _TentangState extends State<Tentang> {
             SizedBox(
               height: 10.0,
             ),
-            Text(
-              'Deskripsi',
-              style: TextStyle(
-                  fontSize: 14.0
+            Expanded(
+              child: Text(
+                'Buoyweather Station type II merupakan wahana apung untuk penelitian mengenai buoy laut yang dilakukan oleh Departemen Fisika ITS. Buoyweather Station type II digunakan untuk menopang peralatan peramalan cuaca maritim dan persebaran ikan.',
+                style: TextStyle(
+                    fontSize: 14.0
+                ),
               ),
             ),
           ],

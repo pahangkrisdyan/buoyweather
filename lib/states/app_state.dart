@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:buoy_weather/models/cuaca_maritim.dart';
 import 'package:buoy_weather/models/prediksi_ikan.dart';
 import 'dart:convert';
+import 'dart:async';
 
 class AppState with ChangeNotifier {
 
@@ -16,7 +17,7 @@ class AppState with ChangeNotifier {
   };
 
   var apiUri = Uri.https(api_all_fields_url, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
-  var cuacaMaritimFuturePredictionUri = Uri.https(api_all_fields_url, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '20'});
+  var cuacaMaritimFuturePredictionUri = Uri.https(api_all_fields_url, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
   var prediksiIkanUri = Uri.https(api_all_fields_url, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
 
   DateTime _dateTime;
@@ -42,8 +43,10 @@ class AppState with ChangeNotifier {
 
   Future<void> fetch()async{
     var response = await http.get(apiUri);
+//    print(apiUri);
     setCuacaMaritim(response.body);
     var response2 = await http.get(cuacaMaritimFuturePredictionUri);
+//    print(cuacaMaritimFuturePredictionUri);
     setCuacaMaritimList(response2.body);
     var response3 = await http.get(prediksiIkanUri);
     setPrediksiIkan(response3.body);
@@ -67,7 +70,7 @@ class AppState with ChangeNotifier {
 
   Future<void> initState() async {
     await fetch();
-    _dateTime = DateTime.now();//waktu jakarta
+    _dateTime = DateTime.now();
     if(DateFormat('kk:mm').format(_dateTime)!=_time||_date==null||_dayName==null){
       String day = DateFormat('dd').format(_dateTime);
       String month = _convertToDayMonthName(DateFormat('MM').format(_dateTime));
@@ -76,11 +79,12 @@ class AppState with ChangeNotifier {
       _dayName = _convertToIndonesian(DateFormat('EEEE').format(_dateTime));
       _date = day + ' ' + month + ' ' + year;
     }
+    Timer.periodic(Duration(seconds: 1), (_) => setTime());
   }
 
   void setTime(){
     fetch();
-    _dateTime = DateTime.now().add(Duration(hours: 7));//waktu jakarta
+    _dateTime = DateTime.now();//waktu jakarta
     if(DateFormat('kk:mm').format(_dateTime)!=_time||_date==null||_dayName==null){
       String day = DateFormat('dd').format(_dateTime);
       String month = _convertToDayMonthName(DateFormat('MM').format(_dateTime));

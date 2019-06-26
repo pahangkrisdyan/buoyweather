@@ -13,7 +13,6 @@ class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
       final appState = Provider.of<AppState>(context);
       appState.initState().then((_){
-        Timer.periodic(Duration(seconds: 1), (Timer t) => appState.setTime());
         navigationPage();
       });
   }
