@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:buoy_weather/states/app_state.dart';
 
@@ -10,7 +9,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  startTime(AppState appState) async {
+  void _startTime(AppState appState) async {
       appState.initState().then((_){
         navigationPage();
       });
@@ -23,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    startTime(appState);
+    _startTime(appState);
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Stack(

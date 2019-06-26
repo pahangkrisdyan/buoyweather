@@ -43,20 +43,17 @@ class AppState with ChangeNotifier {
   CuacaMaritimList get getListCuacaMaritim => _listCuacaMaritim;
   PrediksiIkan get getPrediksiIkan => _prediksiIkan;
   LoadStatus get getLoadStatus => _loadStatus;
-
+  int i = 0;
   Future<void> _fetchData()async{
     setLoadStatus(LoadStatus.LOAD_CUACA_MARITIM);
     var response = await http.get(apiUri);
     setCuacaMaritim(response.body);
-
     setLoadStatus(LoadStatus.LOAD_PREDIKSI_IKAN);
     var response3 = await http.get(prediksiIkanUri);
     setPrediksiIkan(response3.body);
-
     setLoadStatus(LoadStatus.LOAD_PREDIKSI_CUACA_MARITIM);
     var response2 = await http.get(cuacaMaritimFuturePredictionUri);
     setCuacaMaritimList(response2.body);
-
   }
 
   void setPrediksiIkan(String jsonString){
@@ -81,6 +78,7 @@ class AppState with ChangeNotifier {
 
   Future<void> initState() async {
     await _refreshData();
+    Timer.periodic(Duration(seconds: 1), (_) => setTime());
   }
 
 
@@ -98,7 +96,7 @@ class AppState with ChangeNotifier {
       _dayName = _convertToIndonesian(DateFormat('EEEE').format(_dateTime));
       _date = day + ' ' + month + ' ' + year;
     }
-    Timer.periodic(Duration(seconds: 1), (_) => setTime());
+
   }
 
   void setTime()async{
