@@ -10,8 +10,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  startTime() async {
-      final appState = Provider.of<AppState>(context);
+  startTime(AppState appState) async {
       appState.initState().then((_){
         navigationPage();
       });
@@ -23,14 +22,56 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    startTime();
+    final appState = Provider.of<AppState>(context);
+    startTime(appState);
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: Center(
-        child: Image(
-          image: AssetImage('assets/images/logo-putih.png'),
-        ),
-      ),
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: <Widget>[
+          Center(
+            child: Image(
+              image: AssetImage('assets/images/logo-putih.png'),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 40.0),
+            child: _circularProgressIndicator(),
+          ),
+        ],
+      )
     );
+  }
+  Widget _circularProgressIndicator(){
+    final state = Provider.of<AppState>(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        CircularProgressIndicator(
+          backgroundColor: Colors.white,
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        Text(
+          _getLoadingText(state.getLoadStatus),
+          style: TextStyle(
+              color: Colors.white
+          ),
+        )
+      ],
+    );
+  }
+
+  String _getLoadingText(LoadStatus loadStatus){
+    switch(loadStatus){
+      case LoadStatus.PREPARE: return 'Sedang meyiapkan...'; break;
+      case LoadStatus.LOAD_PREDIKSI_IKAN: return 'Sedang memuat data prediksi ikan..'; break;
+      case LoadStatus.LOAD_CUACA_MARITIM: return 'Sedang memuat data cuaca maritim..'; break;
+      case LoadStatus.LOAD_PREDIKSI_CUACA_MARITIM: return 'Sedang memuat data prediksi cuaca maritim..'; break;
+      case LoadStatus.HAMPIR_SELESAI: return 'Hampir selesai..'; break;
+      case LoadStatus.DONE: return 'Selesai..'; break;
+    }
+    return null;
   }
 }
