@@ -3,18 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:buoy_weather/models/cuaca_maritim.dart';
 import 'package:buoy_weather/models/prediksi_ikan.dart';
+import 'package:buoy_weather/constans.dart';
 import 'dart:convert';
 import 'dart:async';
 
-enum LoadStatus{
-  PREPARE, LOAD_CUACA_MARITIM, LOAD_PREDIKSI_CUACA_MARITIM, LOAD_PREDIKSI_IKAN, HAMPIR_SELESAI, DONE
-}
-
 class AppState with ChangeNotifier {
-
-  static const String API_KEY = 'UY4GS7XUXXOYE3R0';
-  static const String DOMAIN_URL = 'www.thingspeak.com';
-
 
   var apiUri = Uri.https(DOMAIN_URL, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
   var cuacaMaritimFuturePredictionUri = Uri.https(DOMAIN_URL, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
@@ -104,8 +97,6 @@ class AppState with ChangeNotifier {
     await _refreshData();
     Timer.periodic(Duration(seconds: 1), (_) => setTime());
   }
-
-
 
   void _refreshData() async {
     setLoadStatus(LoadStatus.PREPARE);

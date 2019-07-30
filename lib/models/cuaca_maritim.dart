@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
+//model yang akan digunakan untuk menyimpan data dari thingspeak
 class CuacaMaritim{
-
+  //field2 yang akam disimpan
   final int entryId;
   final double spl;
   final double tekanan;
@@ -13,6 +12,7 @@ class CuacaMaritim{
   final double temperatur;
   final String label;
 
+  //constructor sebagain methos special untuk membuat object dari class Cuaca Maritim
   CuacaMaritim(
     { this.entryId,
       this.arahAngin,
@@ -26,6 +26,7 @@ class CuacaMaritim{
       this.label
     });
 
+  //constructor yang menerima json sebagain input
   CuacaMaritim.fromJson(Map<String, dynamic> json)
       : entryId = json['feeds'][0]['entry_id'],
         spl = json['feeds'][0]['field1']!=null?double.parse(json['feeds'][0]['field1']):0.0,
@@ -42,9 +43,12 @@ class CuacaMaritim{
 
 }
 
+//class yang memiliki banyak record cuaca maritim (digunakan untuk menyimpan prediksi cuaca maritim)
 class CuacaMaritimList {
+  //list cuaca maritim
   final List<CuacaMaritim> listCuacaMaritim;
 
+  //memproses json menjadi list cuaca maritim
   static List<CuacaMaritim> _fromJson(Map<String, dynamic> json){
     List<CuacaMaritim> list = List<CuacaMaritim>();
     for(int i = 0; i<12; i++){
@@ -66,6 +70,7 @@ class CuacaMaritimList {
     return list;
   }
 
+  //constructor cuaca maritim yang menerima json
   CuacaMaritimList.fromJson(Map<String, dynamic> json)
     : listCuacaMaritim = _fromJson(json);
 

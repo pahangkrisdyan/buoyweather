@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:buoy_weather/states/app_state.dart';
 import 'package:provider/provider.dart';
 
+
+//class sebagai tampilan halaman prediksi ikan
 class PersebaranIkan extends StatefulWidget {
   @override
   _PersebaranIkanState createState() => _PersebaranIkanState();
