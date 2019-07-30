@@ -4,8 +4,8 @@ class PrediksiIkan{
   final double nangka;
   PrediksiIkan({this.kerapu, this.kuniran, this.nangka});
   PrediksiIkan.fromJson(Map<String, dynamic> json)
-      : kerapu = double.parse(json['feeds'][0]['field3']),
-        kuniran = double.parse(json['feeds'][0]['field2']),
-        nangka = double.parse(json['feeds'][0]['field1']);
+      : kerapu = double.parse(json['field3']),
+        kuniran = double.parse(json['field2']),
+        nangka = double.parse(json['field1']);
 
 }

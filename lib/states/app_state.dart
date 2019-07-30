@@ -18,8 +18,8 @@ class AppState with ChangeNotifier {
 
   var apiUri = Uri.https(DOMAIN_URL, '/channels/790450/feeds.json', {'api_key': API_KEY,'results': '1'});
   var cuacaMaritimFuturePredictionUri = Uri.https(DOMAIN_URL, '/channels/802231/feeds.json', {'api_key': API_KEY,'results': '12'});
-  var prediksiIkanUri = Uri.https(DOMAIN_URL, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
-
+//  var prediksiIkanUri = Uri.https(DOMAIN_URL, '/channels/802240/feeds.json', {'api_key': API_KEY,'results': '1'});
+  var prediksiIkanUri2 = Uri.https(DOMAIN_URL, '/channels/802240/feeds.json', {'api_key': API_KEY});
 
   DateTime _dateTime;
   String _time;
@@ -32,7 +32,15 @@ class AppState with ChangeNotifier {
 
   CuacaMaritimList _listCuacaMaritim;
 
-  PrediksiIkan _prediksiIkan;
+  List<PrediksiIkan> _prediksiIkan = [
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+    PrediksiIkan(kerapu: 0.0, kuniran: 0.0, nangka: 0.0),
+  ];
 
   AppState();
 
@@ -41,25 +49,39 @@ class AppState with ChangeNotifier {
   String get getDayName => _dayName;
   CuacaMaritim get getCuacamaritim => _cuacaMaritim;
   CuacaMaritimList get getListCuacaMaritim => _listCuacaMaritim;
-  PrediksiIkan get getPrediksiIkan => _prediksiIkan;
+  List<PrediksiIkan> get getPrediksiIkan => _prediksiIkan;
   LoadStatus get getLoadStatus => _loadStatus;
   int i = 0;
+
   Future<void> _fetchData()async{
     setLoadStatus(LoadStatus.LOAD_CUACA_MARITIM);
     var response = await http.get(apiUri);
+    print(apiUri);
     setCuacaMaritim(response.body);
     setLoadStatus(LoadStatus.LOAD_PREDIKSI_IKAN);
-    var response3 = await http.get(prediksiIkanUri);
-    setPrediksiIkan(response3.body);
+    var responseIkan = await http.get(prediksiIkanUri2);
+    setPrediksiIkan2(responseIkan.body);
     setLoadStatus(LoadStatus.LOAD_PREDIKSI_CUACA_MARITIM);
     var response2 = await http.get(cuacaMaritimFuturePredictionUri);
     setCuacaMaritimList(response2.body);
   }
 
-  void setPrediksiIkan(String jsonString){
+  void setPrediksiIkan2(String jsonString){
     Map map = jsonDecode(jsonString);
-    _prediksiIkan = PrediksiIkan.fromJson(map);
+    List feeds = map['feeds'];
+    if(feeds.length>0){
+      _prediksiIkan = List();
+      for(int i = 0; i<7; i++){
+        PrediksiIkan prediksiIkan = PrediksiIkan.fromJson(feeds[i]);
+        _prediksiIkan.add(prediksiIkan);
+      }
+    }
   }
+
+//  void setPrediksiIkan(String jsonString){
+//    Map map = jsonDecode(jsonString);
+//    _prediksiIkan = PrediksiIkan.fromJson(map);
+//  }
 
   void setLoadStatus(LoadStatus loadStatus){
     _loadStatus = loadStatus;
@@ -73,6 +95,8 @@ class AppState with ChangeNotifier {
 
   void setCuacaMaritim(String jsonString){
     Map cuacaMaritimMap = jsonDecode(jsonString);
+    print("===============");
+    print(cuacaMaritimMap);
     _cuacaMaritim = CuacaMaritim.fromJson(cuacaMaritimMap);
   }
 
@@ -96,7 +120,6 @@ class AppState with ChangeNotifier {
       _dayName = _convertToIndonesian(DateFormat('EEEE').format(_dateTime));
       _date = day + ' ' + month + ' ' + year;
     }
-
   }
 
   void setTime()async{

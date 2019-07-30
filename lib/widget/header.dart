@@ -96,13 +96,13 @@ class Header extends StatelessWidget {
               SizedBox(
                 height: 8.0,
               ),
-              Text(
-                'Berawan 32\" / 24\"',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14.0
-                ),
-              ),
+//              Text(
+//                'Berawan 32\" / 24\"',
+//                style: TextStyle(
+//                    color: Colors.black,
+//                    fontSize: 14.0
+//                ),
+//              ),
             ],
           ),
         ],

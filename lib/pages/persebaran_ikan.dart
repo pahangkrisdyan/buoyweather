@@ -20,6 +20,7 @@ class _PersebaranIkanState extends State<PersebaranIkan> with TickerProviderStat
       initialIndex: 1
     );
     _tabHariController.addListener((){
+      print(_tabHariController.index);
       setState(() {
 
       });
@@ -127,17 +128,17 @@ class _PersebaranIkanState extends State<PersebaranIkan> with TickerProviderStat
             scrollDirection: Axis.horizontal,
             children: <Widget>[
               IkanCard(
-                beratIkan: state.getPrediksiIkan.kerapu,
+                beratIkan: state.getPrediksiIkan[_tabHariController.index].kerapu,
                 imagePath: 'assets/images/ikan kerapu.png',
                 namaIkan: 'IKAN KERAPU',
               ),
               IkanCard(
-                beratIkan: state.getPrediksiIkan.kuniran,
+                beratIkan: state.getPrediksiIkan[_tabHariController.index].kuniran,
                 imagePath: 'assets/images/ikan kuniran.png',
                 namaIkan: 'IKAN KUNIRAN',
               ),
               IkanCard(
-                beratIkan: state.getPrediksiIkan.nangka,
+                beratIkan: state.getPrediksiIkan[_tabHariController.index].nangka,
                 imagePath: 'assets/images/ikan biji nangka.png',
                 namaIkan: 'IKAN BIJI NANGKA',
               ),
@@ -188,7 +189,7 @@ class IkanCard extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-              '$beratIkan kg',
+              '${beratIkan.toStringAsFixed(3)} kg',
               style: TextStyle(
                   fontSize: 10.0
               ),

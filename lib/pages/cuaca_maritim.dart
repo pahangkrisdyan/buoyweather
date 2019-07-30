@@ -245,7 +245,7 @@ class CuacaMaritimColumn extends StatelessWidget {
           Text(
             //kecepatan angin
 //            state.getCuacamaritim?.kecepatanAngin.toString() + 'm/s',
-            kecepatanAngin.toString() + 'm/s',
+            kecepatanAngin.toStringAsFixed(3) + 'm/s',
             style: TextStyle(
             ),
           ),
